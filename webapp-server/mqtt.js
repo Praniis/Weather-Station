@@ -51,7 +51,6 @@ client.on('connect', () => {
 
 
 client.on('message', function (topic, payload, packet) {
-    console.log(topic);
     switch (topic) {
         case 'weather/raw-push':
             handleWeatherData(payload)

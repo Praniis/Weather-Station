@@ -91,6 +91,7 @@ void loop() {
     // Forge lat,lon
     data["lat"] = 11.0808836;
     data["lon"] = 76.9888493;
+    Serial.print("2");
 
     // Epoch Time
     timeClient.update();
@@ -99,7 +100,7 @@ void loop() {
     String msg_to_send;
     serializeJson(data, msg_to_send);
     mqtt.publish("weather/raw-push", msg_to_send.c_str());
-
+    Serial.println(msg_to_send);
     mqtt.loop();
-    delay(1000);
+    delay(50);
 }

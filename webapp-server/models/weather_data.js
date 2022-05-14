@@ -1,7 +1,7 @@
 'use strict';
 
 const {
-	Model,DataTypes:a
+	Model
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
 		pressure: DataTypes.INTEGER,
 		uv_index: DataTypes.INTEGER,
 		coord: {
-			type: a.GEOMETRY('POINT')
+			type: DataTypes.GEOMETRY('POINT')
 		},
 		stime: {
 			type: DataTypes.DATE,

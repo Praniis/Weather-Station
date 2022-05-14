@@ -38,12 +38,14 @@ client.on("offline", () => {
 });
 
 
-process.on('exit', () => {
+process.on('exit', function () {
+    console.log("MQTT nodejs-server stopped");
     client.end();
 });
 
 
 client.on('connect', () => {
+    console.log("MQTT nodejs-server started");
     client.subscribe('weather/raw-push', function () {
         console.log("Subcribed to topic weather/raw-push");
     });

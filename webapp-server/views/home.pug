@@ -1,0 +1,95 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Weather Forcasting Station
+        
+        link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css")
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js")
+        script(type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js")
+        script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js")
+        script(type="text/javascript" src="validate.min.js")
+        link(rel="stylesheet", href="style.css")
+        link(rel="shortcut icon", href="favicon.png", type="image/x-icon")
+    body
+        .dashboard-title Weather Dashboard
+        .container-weather
+            .weather-side
+                .weather-gradient
+                .date-container
+                    h2(class="date-dayname") ...
+                    span(class="date-day") ...
+                    i(class="location-icon" data-feather="map-pin")
+                    span(class="location") ...
+                .weather-container
+                    //- i(class="weather-icon" data-feather="sun")
+                    h1(class="weather-temp") ...
+                    //- h3(class="weather-desc") ...
+            .info-side
+                .today-info-container
+                    .today-info
+                        //- div(class="precipitation") 
+                        //-     span(class="title") PRECIPITATION
+                        //-     span(class="value") ... %
+                        //-     .clear
+                        div(class="humidity") 
+                            span(class="title") HUMIDITY
+                            span(class="value") ... %
+                            .clear
+                        //- div(class="wind") 
+                        //-     span(class="title") WIND
+                        //-     span(class="value") ... km/h
+                        //-     .clear
+                .location-container
+                    button#location-button.location-button
+                        i(data-feather="map-pin")
+                        span Change location
+                .csv-download
+                    button#csv-button.csv-button(data-toggle="modal" data-target="#csvModalCenter")
+                        i(data-feather="download")
+                        span Download CSV
+
+        #changeLocationModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='changeLocationModalCenterTitle' aria-hidden='true')
+            .modal-dialog.modal-dialog-centered(role='document')
+                .modal-content
+                    .modal-header
+                        h5#changeLocationModalLongTitle.modal-title Change Location
+                        button.close(type='button' data-dismiss='modal' aria-label='Close')
+                            span(aria-hidden='true') &times;
+                    .modal-body
+                            .form-group
+                                label.col-form-label Location
+                                input#ch_locationName.locationName.form-control(type="text", name='location' required)
+                                input#ch_location_lat.location_lat.form-control(type='hidden', name='lat')
+                                input#ch_location_lon.location_lon.form-control(type='hidden', name='lon')
+                    .modal-footer
+                        button#changeLocationDownloadBtn.btn.btn-primary(type='submit') Download
+
+        #csvModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='csvModalCenterTitle' aria-hidden='true')
+            .modal-dialog.modal-dialog-centered(role='document')
+                .modal-content
+                    .modal-header
+                        h5#csvModalLongTitle.modal-title
+                            b Download CSV
+                        button.close(type='button' data-dismiss='modal' aria-label='Close')
+                            span(aria-hidden='true') &times;
+                    .modal-body
+                        form#csvDownloadForm(action="/api/weather/")
+                            .form-group
+                                label.col-form-label Date
+                                input#datetimes.form-control(type="text" name="datetimes" val="" required)
+                            .form-group
+                                label.col-form-label Location
+                                input#locationName.locationName.form-control(type="text", name='location' required)
+                                input#location_lat.location_lat.form-control(type='hidden', name='lat')
+                                input#location_lon.location_lon.form-control(type='hidden', name='lon')
+                            .modal-footer
+                                button#csvDownloadBtn.btn.btn-primary(type='submit') Download
+
+        script(src="feather.min.js")
+        script(src="home.js")
+        script(type='text/javascript', src='//maps.googleapis.com/maps/api/js?key=AIzaSyCI33JZYjBhrlQEsmj_ovDmoKfAPW_mPZo&libraries=places&callback=initMap')

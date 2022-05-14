@@ -1,20 +1,29 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const models = require('./models');
 
-models.sequelize.sync({ alter: true, force: true }).then(function () {
+models.sequelize.sync().then(function () {
     const port = 8080
     app.listen(port, () => {
         console.log(`Server started on Port: ${port}`)
     });
 });
 
+app.use(cors({
+    origin: '*'
+}));
+app.use(express.static('public'))
+app.set('view engine', 'pug')
 app.use(bodyParser.json());
 
 // API Routes
 app.use("/api/weather/", require("./routes/weather"));
+
+// Page Routes
+app.use("/", require("./routes"));
 
 
 app.use(function (req, res, next) {
@@ -25,10 +34,12 @@ app.use(function (req, res, next) {
 
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
+        console.log(err);
         res.status(err.status || 500);
-        res.render('error', {
+        res.send({
             success: false,
-            error: err.message
+            error: "Internal Server Error",
+            err: err.stack
         });
     });
 } else {

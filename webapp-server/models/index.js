@@ -3,7 +3,6 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const sequelizeStream = require('node-sequelize-stream');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/db_config.json')[env];
@@ -33,9 +32,6 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
-
-sequelize.models = db;
-sequelizeStream(sequelize);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

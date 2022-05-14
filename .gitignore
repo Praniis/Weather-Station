@@ -1,2 +1,3 @@
 webapp-server/node_modules
-webapp-public/node_modules
+webapp-server/config/app.json
+webapp-server/config/db_config.json

@@ -267,6 +267,11 @@ body {
     border-color: none !important;
 }
 
+.modal-dialog-centered {
+    margin-top: 260px;
+    margin-left: 628px;
+}
+
 .pac-container {
     z-index: 100000 !important;
 }

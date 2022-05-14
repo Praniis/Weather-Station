@@ -50,8 +50,8 @@ $(document).ready(function () {
                 $(".date-dayname").text(dayName)
                 $(".date-day").text(day)
                 $(".location").text(`${params.lat}, ${params.lon}`)
-                $(".humidity .value").text(`${res.humidity || '...'}`)
-                $(".weather-temp").text(`${parseFloat(res.temperature).toFixed(1) || '...'}`)
+                $(".humidity .value").text(`${res.humidity && res.humidity + " %" || '...'}`)
+                $(".weather-temp").text(`${parseFloat(res.temperature + ' °C').toFixed(1) || '...'}`)
             }
         } catch (error) {}
     }, 1000);

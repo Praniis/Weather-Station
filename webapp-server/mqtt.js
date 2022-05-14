@@ -54,12 +54,12 @@ client.on('message', function (topic, payload, packet) {
     console.log(topic);
     switch (topic) {
         case 'weather/raw-push':
-            handleTest(payload)
+            handleWeatherData(payload)
     }
 });
 
 
-async function handleTest(payload) {
+async function handleWeatherData(payload) {
     try {
         const msg = JSON.parse(payload.toLocaleString())
         var data = {
